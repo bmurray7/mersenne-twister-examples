@@ -81,7 +81,7 @@ class MersenneTwister
   
   def generate_numbers
     for i in 0..623
-      y = @mt[i][31] + @mt[(i+1) % 624].last_bits(31)
+      y = (@mt[i][31] << 31) + @mt[(i+1) % 624].last_bits(31)
       @mt[i] = @mt[(i + 397) % 624] ^ (y >> 1)
       @mt[i] = @mt[i] ^ 2567483615 if y.odd?
     end
